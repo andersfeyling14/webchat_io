@@ -1,0 +1,26 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src\\app-shell.js",
+  "fragments": [],
+  "sources": [
+    "src/**/*",
+    "index.html",
+    "src/app-shell.js"
+  ],
+  "extraDependencies": [
+    "bower_components/webcomponentsjs/*.js"
+  ],
+  "builds": [
+    {
+      "name": "bundled",
+      "browserCapabilities": [
+        "es2015",
+        "modules"
+      ],
+      "bundle": true
+    }
+  ],
+  "npm": true,
+  "componentDir": "node_modules/",
+  "moduleResolution": "node"
+}

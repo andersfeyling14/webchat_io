@@ -1,0 +1,16 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/app-shell.js",
+  "builds": [
+    {
+      "name": "bundled",
+      "browserCapabilities": [
+        "es2015",
+        "modules"
+      ],
+      "bundle": true
+    }
+  ],
+  "moduleResolution": "node",
+  "npm": true
+}
