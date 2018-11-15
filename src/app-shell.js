@@ -14,7 +14,8 @@ class AppShell extends LitElement {
         this.users = [];
         this.messages = [];
 
-        this.socket = io('http://localhost:3000');
+        //this.socket = io('http://localhost:3000');
+        this.socket = io();
 
         this.socket.on('update-messages', messages => {
             this.messages = messages;
@@ -35,6 +36,7 @@ class AppShell extends LitElement {
     onSend() {
         const inputElement = this.shadowRoot.querySelector("input");
         if (inputElement.value) {
+            console.log("Hey now");
             this.socket.emit("new-message", inputElement.value);
             inputElement.value = '';
         }
@@ -81,6 +83,7 @@ class AppShell extends LitElement {
                 }
                 
                 #chat-panel{
+                    overflow: auto;
                     grid-column: 2;
                     grid-row: 1;
                     padding-top: 10px;
@@ -88,6 +91,7 @@ class AppShell extends LitElement {
                 }
                
                 #user-container{
+                    margin-bottom: auto;
                     grid-column: 1;
                     grid-row: 1/3;
                     background-color: #64b5f6;
@@ -123,7 +127,6 @@ class AppShell extends LitElement {
             </style>
  
             <div id="container">
- 
                 <div id="input-container">
                     <input @keypress=${e => this.onKeyPressed(e)}>
                     <button
@@ -138,7 +141,7 @@ class AppShell extends LitElement {
                             <div class="content">${message.msg}</div>
                         </div>
                         `)
-            }
+                    }
                 </div>
  
                 <div id="user-container">

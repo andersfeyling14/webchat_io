@@ -2284,80 +2284,104 @@ class AppShell extends LitElement {
                 #container {
                     display: grid;
                     height: 100%;
+                    background-color: #eeeeee;
                     grid-template-columns: 200px auto;
-                    grid-template-rows: auto 50px;
+                    grid-template-rows: auto 60px;
                 }
                 #input-container{
                     display: flex;
                     grid-column: 2;
                     grid-row: 2;
+                    padding: 10px;
                 }
+                
+                #input-container > input {
+                    border-radius: 500px;
+                    border: 1px solid #a3a3a3;
+                    flex: 1;
+                    padding: 0 15px; 
+                }
+                
+                #input-container > button {
+                    border-radius: 500px;
+                    border: none;
+                    text-decoration: none;
+                    background-color: #64b5f6;
+                    padding: 10px;
+                    margin-left: 10px;
+                }
+                
                 #chat-panel{
                     grid-column: 2;
                     grid-row: 1;
+                    padding-top: 10px;
+                    padding-left: 10px;
                 }
-                input{
-                    flex: 1;
-                }
-                
+               
                 #user-container{
                     grid-column: 1;
                     grid-row: 1/3;
                     background-color: #64b5f6;
-                    
+                    justify-content: center;                  
                 }
-                
+               
                 #user-header{
                     background-color: #2196f3;
+                    height: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 20px;
                 }
                 
-                #user-header>.header{
-                    
+                #user-list > .user {
+                    padding: 5px 10px;
+                    text-align: center;
                 }
                 
-                #user-list{
-                    
+                .message > .username {
+                    font-weight: bold;
+                    margin-left: 5px;
                 }
                 
-                #users{
-                    
+                .message > .content {
+                    background: white;
+                    margin-bottom: 10px;
+                    margin-right: 10px;
+                    border-radius: 10px; 
+                    padding: 5px;
                 }
-                
             </style>
-
+ 
             <div id="container">
-
+ 
                 <div id="input-container">
-                    <input @keypress=${e => this.onKeyPressed(e)}> 
-                    <button 
+                    <input @keypress=${e => this.onKeyPressed(e)}>
+                    <button
                     @click=${() => this.onSend()}>Send</button>
                 </div>
-
-
+ 
+ 
                 <div id="chat-panel">
                     ${messages.map(message => html`
-                    <div>
-                        <div>
-                            <b>${message.username}</b>
+                        <div class="message">
+                            <div class="username">${message.username}</div>
+                            <div class="content">${message.msg}</div>
                         </div>
-                        <div>
-                            ${message.msg}
-                        </div>
-                    `)}
+                        `)}
                 </div>
-
+ 
                 <div id="user-container">
-                    <div id="user-header">
-                        <h3 id="header-title">Online Users</h3>
-                    </div>
-                    <div id="user-list">${users.map(user => html`
-                        <div>${user}</div>
-                    `)}
+                    <div id="user-header">Online Users</div>
+                    <div id="user-list">
+                        ${users.map(user => html`
+                            <div class="user">${user}</div>
+                        `)}
                     </div>
                 </div>
             </div>
-            
-        `; // language=HTML
+           
+        `;
   }
 
 }

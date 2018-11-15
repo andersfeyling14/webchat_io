@@ -37,6 +37,8 @@ app.use('/src', express.static(__dirname + '/build/bundled/src/'));
 
 //Server side connection.
 io.on("connection", socket => {
+
+    //New user
     let username = getRandomUsername();
     socket.username = username;
 
@@ -47,7 +49,7 @@ io.on("connection", socket => {
 
     console.log("A user connected. %s users connected", connections.length);
 
-
+    //Disconnect
     socket.on("disconnect", () => {
         connections.splice(connections.indexOf(socket), 1);
         io.emit('update-users', connections.map(con => con.username));
@@ -55,18 +57,13 @@ io.on("connection", socket => {
         io.emit('update-messages', messages);
 
     });
-
+    // New message
     socket.on('new-message', msg => {
         messages.push({username, msg});
 
         console.log(username +": "+msg);
         io.emit('update-messages', messages);
     });
-
-    //Send message list
-    socket.on("new-message", () => {
-
-    })
 });
 
 server.listen(3000, function () {
